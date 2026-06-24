@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="AutoTranslate.AboutDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="About"
+    CloseButtonText="Close"
+    DefaultButton="Close">
+
+    <StackPanel Spacing="14" MinWidth="340" MaxWidth="380">
+
+        <StackPanel Orientation="Horizontal" Spacing="14">
+            <Image Source="ms-appx:///Assets/logo.png" Width="52" Height="52" VerticalAlignment="Center" />
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Auto Translate Clipboard" Style="{StaticResource SubtitleTextBlockStyle}" />
+                <TextBlock Text="Version 1.0.1  ·  by HASoftware (HoangAnhDev)"
+                           Style="{StaticResource CaptionTextBlockStyle}"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock TextWrapping="Wrap"
+                   Text="Công cụ dịch nhanh bằng phím tắt — miễn phí 100%." />
+
+        <InfoBar IsOpen="True" IsClosable="False" Severity="Warning"
+                 Title="Phần mềm miễn phí"
+                 Message="Nếu bạn phải TRẢ TIỀN để có phần mềm này thì bạn đã bị lừa. Hãy tải bản gốc miễn phí tại GitHub hoặc Telegram bên dưới." />
+
+        <StackPanel Orientation="Horizontal" Spacing="4">
+            <HyperlinkButton Content="GitHub" NavigateUri="https://github.com/hasoftware" />
+            <HyperlinkButton Content="Telegram" NavigateUri="https://t.me/hoanganhdev" />
+            <HyperlinkButton Content="Facebook" NavigateUri="https://www.facebook.com/NTTU1502" />
+        </StackPanel>
+
+        <TextBlock Text="© 2026 HASoftware. Mọi đóng góp / báo lỗi xin liên hệ qua Telegram."
+                   TextWrapping="Wrap"
+                   Style="{StaticResource CaptionTextBlockStyle}"
+                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+
+    </StackPanel>
+</ContentDialog>

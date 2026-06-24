@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="AutoTranslate.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="RootGrid" RowDefinitions="40,Auto">
+
+        <Grid.KeyboardAccelerators>
+            <KeyboardAccelerator Key="Escape" Invoked="OnEscape" />
+        </Grid.KeyboardAccelerators>
+
+
+        <!-- Thanh tiêu đề tuỳ biến (kéo được) -->
+        <Grid x:Name="AppTitleBar" Grid.Row="0" Background="Transparent">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0,0,0" Spacing="8">
+                <Image Source="ms-appx:///Assets/logo.png" Width="16" Height="16" VerticalAlignment="Center" />
+                <TextBlock Text="Auto Translate Clipboard" VerticalAlignment="Center"
+                           Style="{StaticResource CaptionTextBlockStyle}" />
+                <TextBlock Text="v1.0.1" VerticalAlignment="Center"
+                           Style="{StaticResource CaptionTextBlockStyle}"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Nội dung -->
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Padding="16,0,16,14" Spacing="12" VerticalAlignment="Top">
+
+            <!-- Cụm nút About + Settings canh phải -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="2">
+                <Button x:Name="AboutBtn" Background="Transparent" BorderThickness="0" Padding="8,4"
+                        AutomationProperties.Name="About"
+                        ToolTipService.ToolTip="About" Click="OnOpenAbout">
+                    <FontIcon Glyph="&#xE946;" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" />
+                </Button>
+                <Button x:Name="SettingsBtn" Background="Transparent" BorderThickness="0" Padding="8,4"
+                        AutomationProperties.Name="Settings"
+                        ToolTipService.ToolTip="Settings" Click="OnOpenSettings">
+                    <FontIcon Glyph="&#xE713;" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" />
+                </Button>
+            </StackPanel>
+
+            <!-- Hàng chọn ngôn ngữ -->
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ComboBox x:Name="SourceCombo" Grid.Column="0" HorizontalAlignment="Stretch"
+                          SelectionChanged="OnSourceChanged" />
+
+                <Button x:Name="SwapBtn" Grid.Column="1" Click="OnSwap"
+                        VerticalAlignment="Stretch" Padding="10,0"
+                        ToolTipService.ToolTip="Swap languages">
+                    <FontIcon Glyph="&#xE8AB;" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14" />
+                </Button>
+
+                <ComboBox x:Name="TargetCombo" Grid.Column="2" HorizontalAlignment="Stretch"
+                          SelectionChanged="OnTargetChanged" />
+            </Grid>
+
+            <!-- Ô nhập -->
+            <TextBox x:Name="InputBox"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     MinHeight="96"
+                     MaxHeight="180"
+                     PlaceholderText="Nhập văn bản…  (Enter để dịch, Shift+Enter để xuống dòng)"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     PreviewKeyDown="OnInputKeyDown" />
+
+            <!-- Nút Translate -->
+            <Button x:Name="TranslateBtn" Content="Translate"
+                    HorizontalAlignment="Stretch"
+                    Style="{StaticResource AccentButtonStyle}"
+                    Click="OnTranslateClick" />
+
+            <!-- Footer thương hiệu HASoftware + liên kết -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Spacing="4" Margin="0,2,0,0">
+                <Image Source="ms-appx:///Assets/logo.png" Width="18" Height="18"
+                       VerticalAlignment="Center" Opacity="0.9" />
+                <TextBlock Text="HASoftware" VerticalAlignment="Center"
+                           Style="{StaticResource CaptionTextBlockStyle}"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <TextBlock Text="·" VerticalAlignment="Center"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <HyperlinkButton Content="GitHub" NavigateUri="https://github.com/hasoftware"
+                                 Padding="5,2" FontSize="12" />
+                <HyperlinkButton Content="Telegram" NavigateUri="https://t.me/hoanganhdev"
+                                 Padding="5,2" FontSize="12" />
+                <HyperlinkButton Content="Facebook" NavigateUri="https://www.facebook.com/NTTU1502"
+                                 Padding="5,2" FontSize="12" />
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>
