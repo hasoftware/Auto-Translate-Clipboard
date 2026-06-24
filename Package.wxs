@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+
+  <Package Name="Auto Translate Clipboard"
+           Manufacturer="HASoftware"
+           Version="1.0.1.0"
+           UpgradeCode="b3f1c2a4-9e7d-4c3b-9a1f-2d6e8c0a5b71"
+           Scope="perUser">
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="AppIcon" SourceFile="Assets\hasoftware.ico" />
+    <Property Id="ARPPRODUCTICON" Value="AppIcon" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/hasoftware/Auto-Translate-Clipboard" />
+
+    <!-- Cài vào %LocalAppData%\Programs\Auto Translate Clipboard (không cần admin) -->
+    <StandardDirectory Id="LocalAppDataFolder">
+      <Directory Id="ProgramsFolder" Name="Programs">
+        <Directory Id="INSTALLFOLDER" Name="Auto Translate Clipboard" />
+      </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="AppMenuDir" Name="Auto Translate Clipboard" />
+    </StandardDirectory>
+
+    <StandardDirectory Id="DesktopFolder" />
+
+    <Feature Id="Main">
+      <ComponentGroupRef Id="AppFiles" />
+      <ComponentRef Id="Shortcuts" />
+    </Feature>
+
+    <!-- Tự gom toàn bộ file đã publish -->
+    <ComponentGroup Id="AppFiles" Directory="INSTALLFOLDER">
+      <Files Include="dist\AutoTranslate\**" />
+    </ComponentGroup>
+
+    <Component Id="Shortcuts" Directory="AppMenuDir" Guid="c7a2d1e8-3b4f-4a6c-8d2e-1f9b0c3a7e52">
+      <Shortcut Id="StartMenuShortcut" Name="Auto Translate Clipboard"
+                Target="[INSTALLFOLDER]AutoTranslate.exe" WorkingDirectory="INSTALLFOLDER"
+                Icon="AppIcon" />
+      <Shortcut Id="DesktopShortcut" Directory="DesktopFolder" Name="Auto Translate Clipboard"
+                Target="[INSTALLFOLDER]AutoTranslate.exe" WorkingDirectory="INSTALLFOLDER"
+                Icon="AppIcon" />
+      <RemoveFolder Id="RemoveAppMenuDir" Directory="AppMenuDir" On="uninstall" />
+      <RegistryValue Root="HKCU" Key="Software\HASoftware\AutoTranslateClipboard"
+                     Name="Installed" Type="integer" Value="1" KeyPath="yes" />
+    </Component>
+
+  </Package>
+</Wix>

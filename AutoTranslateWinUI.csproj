@@ -22,6 +22,7 @@
     <Company>HASoftware</Company>
     <Authors>HoangAnhDev</Authors>
     <Copyright>© 2026 HASoftware</Copyright>
+    <ApplicationIcon>Assets\hasoftware.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
