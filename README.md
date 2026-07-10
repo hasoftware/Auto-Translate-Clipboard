@@ -1,5 +1,9 @@
 # Auto Translate Clipboard
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11%20x64-blue.svg)](#installation)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 A lightweight Windows 11 translation tool. Press a global hotkey anywhere, type or paste your text, press Enter, and the translation is copied to your clipboard instantly. The window then hides itself so you can paste the result wherever you were working.
 
 Built with WinUI 3 (Windows App SDK) for a native Fluent look that follows your system light or dark theme.
@@ -70,6 +74,19 @@ The project is unpackaged WinUI 3 and builds with the dotnet CLI; no Visual Stud
 - SettingsDialog: theme, hotkey capture, run at startup, and the language picker.
 - AboutDialog: app information and links.
 - Services: translation, language list, settings persistence, global hotkey, and startup registration.
+
+## Contributing
+
+Contributions are welcome! Please read the [Contributing Guide](CONTRIBUTING.md)
+before opening an issue or pull request. All participants are expected to
+follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+Found a security issue? Please report it privately — see the
+[Security Policy](SECURITY.md).
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
 
 ## Free software
 

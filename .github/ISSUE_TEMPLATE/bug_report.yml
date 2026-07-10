@@ -1,0 +1,56 @@
+name: Bug report
+description: Report a problem with Auto Translate Clipboard
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill in as much
+        detail as you can — it makes the issue much faster to fix.
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+      placeholder: When I press the hotkey while ... the window ...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce the problem?
+      placeholder: |
+        1. Open the app
+        2. Press Ctrl + Shift + T
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      description: Shown in the About dialog.
+      placeholder: e.g. 1.0.1
+    validations:
+      required: true
+  - type: input
+    id: os-version
+    attributes:
+      label: Windows version
+      placeholder: e.g. Windows 11 23H2 (22631)
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots or additional context
+      description: Anything else that might help (screenshots, error messages, other apps that conflict with the hotkey, ...).

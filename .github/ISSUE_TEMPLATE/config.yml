@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/hasoftware/Auto-Translate-Clipboard/security/advisories/new
+    about: Please report security issues privately, not as public issues.
+  - name: Questions & contact
+    url: https://t.me/hoanganhdev
+    about: For general questions you can also reach the author on Telegram.
