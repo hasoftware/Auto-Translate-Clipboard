@@ -23,6 +23,17 @@ Built with WinUI 3 (Windows App SDK) for a native Fluent look that follows your 
 - Runs in the system tray and can start automatically with Windows.
 - Native Fluent interface with Mica background and rounded corners.
 
+## Platform support
+
+| Platform | Status | Where |
+| --- | --- | --- |
+| Windows 10/11 (x64) | Stable — this is the main version | Repo root (WinUI 3) |
+| macOS | Preview — builds, untested on real hardware | [`MacOS/`](MacOS/) (Avalonia) |
+| Linux | Preview — X11 works, Wayland limited | [`Linux/`](Linux/) (Avalonia) |
+
+The macOS and Linux versions are separate Avalonia apps with the same
+workflow. See the README in each folder for build steps and platform notes.
+
 ## How it works
 
 The app sends the text to Google Translate's public endpoint and reads the result as JSON, so multi line text and Unicode are handled correctly. The translation is always placed on the clipboard, ready to paste.

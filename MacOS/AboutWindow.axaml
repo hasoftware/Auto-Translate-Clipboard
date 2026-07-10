@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AutoTranslate.AboutWindow"
+        Title="About"
+        Width="420" SizeToContent="Height" CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        Icon="avares://AutoTranslate/Assets/logo.png">
+
+    <StackPanel Margin="20" Spacing="14">
+
+        <StackPanel Orientation="Horizontal" Spacing="14">
+            <Image Source="avares://AutoTranslate/Assets/logo.png" Width="52" Height="52"
+                   VerticalAlignment="Center" />
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Auto Translate Clipboard" FontSize="18" FontWeight="SemiBold" />
+                <TextBlock Text="Version 1.0.0-preview1  ·  by HASoftware (HoangAnhDev)"
+                           FontSize="12" Opacity="0.7" />
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock TextWrapping="Wrap"
+                   Text="Công cụ dịch nhanh bằng phím tắt — miễn phí 100%." />
+
+        <Border Background="#33B58900" CornerRadius="6" Padding="12">
+            <StackPanel Spacing="4">
+                <TextBlock Text="Phần mềm miễn phí" FontWeight="SemiBold" />
+                <TextBlock TextWrapping="Wrap"
+                           Text="Nếu bạn phải TRẢ TIỀN để có phần mềm này thì bạn đã bị lừa. Hãy tải bản gốc miễn phí tại GitHub hoặc Telegram bên dưới." />
+            </StackPanel>
+        </Border>
+
+        <StackPanel Orientation="Horizontal" Spacing="4">
+            <HyperlinkButton Content="GitHub" NavigateUri="https://github.com/hasoftware" />
+            <HyperlinkButton Content="Telegram" NavigateUri="https://t.me/hoanganhdev" />
+            <HyperlinkButton Content="Facebook" NavigateUri="https://www.facebook.com/NTTU1502" />
+        </StackPanel>
+
+        <TextBlock Text="© 2026 HASoftware. Mọi đóng góp / báo lỗi xin liên hệ qua Telegram."
+                   TextWrapping="Wrap" FontSize="12" Opacity="0.7" />
+
+        <Button Content="Close" Classes="accent" HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center" Click="OnClose" />
+
+    </StackPanel>
+</Window>

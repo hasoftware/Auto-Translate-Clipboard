@@ -37,4 +37,12 @@
     </Content>
   </ItemGroup>
 
+  <!-- Các bản Avalonia cho macOS/Linux là project riêng, loại khỏi build WinUI -->
+  <ItemGroup>
+    <Compile Remove="MacOS\**;Linux\**" />
+    <Content Remove="MacOS\**;Linux\**" />
+    <None Remove="MacOS\**;Linux\**" />
+    <Page Remove="MacOS\**;Linux\**" />
+  </ItemGroup>
+
 </Project>

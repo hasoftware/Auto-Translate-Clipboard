@@ -1,0 +1,66 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AutoTranslate.SettingsWindow"
+        Title="Settings"
+        Width="420" SizeToContent="Height" CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        Icon="avares://AutoTranslate/Assets/logo.png">
+
+    <StackPanel Margin="20" Spacing="18">
+
+        <StackPanel Spacing="6">
+            <TextBlock Text="Theme" FontWeight="SemiBold" />
+            <ComboBox x:Name="ThemeCombo" HorizontalAlignment="Stretch">
+                <ComboBoxItem Content="System" />
+                <ComboBoxItem Content="Light" />
+                <ComboBoxItem Content="Dark" />
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+            <TextBlock Text="Popup hotkey" FontWeight="SemiBold" />
+            <Button x:Name="HotkeyBtn" HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" Click="OnCaptureHotkey" />
+            <TextBlock Text="Click the button, then press a key combination (e.g. Ctrl+Shift+T)."
+                       FontSize="12" Opacity="0.7" TextWrapping="Wrap" />
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+            <TextBlock Text="Run at startup" FontWeight="SemiBold" />
+            <ToggleSwitch x:Name="StartupSwitch" />
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+            <TextBlock Text="Languages shown in dropdowns" FontWeight="SemiBold" />
+            <TextBlock Text="Tick only the languages you use — the rest stay hidden from the dropdowns."
+                       FontSize="12" Opacity="0.7" TextWrapping="Wrap" />
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button Content="Select all" Click="OnSelectAllLangs" />
+                <Button Content="Clear" Click="OnClearLangs" />
+            </StackPanel>
+            <Border BorderThickness="1" CornerRadius="6"
+                    BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                <ScrollViewer Height="200">
+                    <ItemsControl x:Name="LangList" Margin="8">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Name}"
+                                          IsChecked="{Binding Checked, Mode=TwoWay}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Border>
+        </StackPanel>
+
+        <Grid ColumnDefinitions="*,8,*">
+            <Button Grid.Column="0" Content="Save" Classes="accent"
+                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                    Click="OnSave" />
+            <Button Grid.Column="2" Content="Cancel"
+                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                    Click="OnCancel" />
+        </Grid>
+
+    </StackPanel>
+</Window>

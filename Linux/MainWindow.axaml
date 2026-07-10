@@ -1,0 +1,56 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AutoTranslate.MainWindow"
+        Title="Auto Translate Clipboard"
+        Width="480" SizeToContent="Height" CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        Icon="avares://AutoTranslate/Assets/logo.png">
+
+    <StackPanel Margin="16,8,16,14" Spacing="12">
+
+        <!-- Cụm nút About + Settings canh phải -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="2">
+            <Button x:Name="AboutBtn" Background="Transparent" BorderThickness="0"
+                    Padding="8,4" Content="ⓘ" Click="OnOpenAbout"
+                    ToolTip.Tip="About" />
+            <Button x:Name="SettingsBtn" Background="Transparent" BorderThickness="0"
+                    Padding="8,4" Content="⚙" Click="OnOpenSettings"
+                    ToolTip.Tip="Settings" />
+        </StackPanel>
+
+        <!-- Hàng chọn ngôn ngữ -->
+        <Grid ColumnDefinitions="*,Auto,*">
+            <ComboBox x:Name="SourceCombo" Grid.Column="0" HorizontalAlignment="Stretch"
+                      Margin="0,0,4,0" SelectionChanged="OnSourceChanged" />
+            <Button x:Name="SwapBtn" Grid.Column="1" Content="⇄" Padding="10,4"
+                    VerticalAlignment="Stretch" Click="OnSwap"
+                    ToolTip.Tip="Swap languages" />
+            <ComboBox x:Name="TargetCombo" Grid.Column="2" HorizontalAlignment="Stretch"
+                      Margin="4,0,0,0" SelectionChanged="OnTargetChanged" />
+        </Grid>
+
+        <!-- Ô nhập -->
+        <TextBox x:Name="InputBox"
+                 AcceptsReturn="True" TextWrapping="Wrap"
+                 MinHeight="96" MaxHeight="180"
+                 Watermark="Nhập văn bản…  (Enter để dịch, Shift+Enter để xuống dòng)" />
+
+        <!-- Nút Translate -->
+        <Button x:Name="TranslateBtn" Content="Translate"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                Classes="accent" Click="OnTranslateClick" />
+
+        <!-- Footer thương hiệu + liên kết -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
+            <TextBlock Text="HASoftware ·" VerticalAlignment="Center"
+                       FontSize="12" Opacity="0.7" />
+            <HyperlinkButton Content="GitHub" FontSize="12" Padding="5,2"
+                             NavigateUri="https://github.com/hasoftware" />
+            <HyperlinkButton Content="Telegram" FontSize="12" Padding="5,2"
+                             NavigateUri="https://t.me/hoanganhdev" />
+            <HyperlinkButton Content="Facebook" FontSize="12" Padding="5,2"
+                             NavigateUri="https://www.facebook.com/NTTU1502" />
+        </StackPanel>
+
+    </StackPanel>
+</Window>
