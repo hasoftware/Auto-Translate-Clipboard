@@ -9,7 +9,7 @@ A lightweight Windows 11 translation tool. Press a global hotkey anywhere, type 
 Built with WinUI 3 (Windows App SDK) for a native Fluent look that follows your system light or dark theme.
 
 <p align="center">
-  <img src="docs/screenshot-main.png" alt="Auto Translate Clipboard main window (dark theme)" width="466">
+  <img src="docs/showcase.png" alt="Auto Translate Clipboard: main window, Settings, and About dialogs (dark theme)">
 </p>
 
 ## Features
@@ -55,10 +55,6 @@ Open Settings from the gear button in the top right corner.
 - Run at startup: launch the app automatically when Windows starts.
 - Languages shown in dropdowns: tick only the languages you use. The rest are hidden from the source and target dropdowns.
 
-<p align="center">
-  <img src="docs/screenshot-settings.png" alt="Settings dialog: theme, hotkey, run at startup, and the language picker" width="420">
-</p>
-
 ## Build from source
 
 Requirements:
@@ -99,10 +95,6 @@ This project is licensed under the [MIT License](LICENSE).
 ## Free software
 
 Auto Translate Clipboard is one hundred percent free. If you were asked to pay for it, you were scammed. Always download the original from the links below.
-
-<p align="center">
-  <img src="docs/screenshot-about.png" alt="About dialog" width="420">
-</p>
 
 ## Author
 
