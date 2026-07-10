@@ -1,0 +1,28 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['**.md', 'docs/**']
+  pull_request:
+    branches: [main]
+    paths-ignore: ['**.md', 'docs/**']
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Build Windows (WinUI 3)
+        run: dotnet build AutoTranslateWinUI.csproj -c Release -p:Platform=x64 -r win-x64
+
+      - name: Build macOS (Avalonia)
+        run: dotnet build MacOS/AutoTranslate.MacOS.csproj -c Release
+
+      - name: Build Linux (Avalonia)
+        run: dotnet build Linux/AutoTranslate.Linux.csproj -c Release

@@ -1,0 +1,143 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to build and attach artifacts to'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Publish
+        run: dotnet publish AutoTranslateWinUI.csproj -c Release -r win-x64 -p:Platform=x64 --self-contained true -o publish/AutoTranslate
+
+      - name: Zip
+        shell: pwsh
+        run: |
+          $tag = "${{ inputs.tag || github.ref_name }}"
+          Compress-Archive -Path publish/AutoTranslate -DestinationPath "AutoTranslateClipboard-$tag-win-x64.zip"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: win-x64
+          path: AutoTranslateClipboard-*.zip
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Publish
+        run: dotnet publish Linux/AutoTranslate.Linux.csproj -c Release -r linux-x64 --self-contained true -o publish/AutoTranslate
+
+      - name: Tar (giữ cờ thực thi)
+        run: |
+          TAG="${{ inputs.tag || github.ref_name }}"
+          chmod +x publish/AutoTranslate/AutoTranslate
+          tar -C publish -czf "AutoTranslateClipboard-$TAG-linux-x64.tar.gz" AutoTranslate
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-x64
+          path: AutoTranslateClipboard-*.tar.gz
+
+  macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        rid: [osx-arm64, osx-x64]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Publish
+        run: dotnet publish MacOS/AutoTranslate.MacOS.csproj -c Release -r ${{ matrix.rid }} --self-contained true -o publish/${{ matrix.rid }}
+
+      - name: Make .app bundle
+        run: |
+          TAG="${{ inputs.tag || github.ref_name }}"
+          # CFBundleVersion phải dạng số; tag không chuẩn semver thì dùng 1.0.0
+          VERSION=$(echo "$TAG" | sed 's/^v//' | grep -Eo '^[0-9]+\.[0-9]+\.[0-9]+' || echo "1.0.0")
+
+          APP="AutoTranslate.app"
+          mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
+          cp -R publish/${{ matrix.rid }}/. "$APP/Contents/MacOS/"
+          chmod +x "$APP/Contents/MacOS/AutoTranslate"
+
+          # Icon .icns từ logo.png
+          mkdir icon.iconset
+          for s in 16 32 128 256 512; do
+            sips -z $s $s MacOS/Assets/logo.png --out "icon.iconset/icon_${s}x${s}.png" >/dev/null
+            sips -z $((s*2)) $((s*2)) MacOS/Assets/logo.png --out "icon.iconset/icon_${s}x${s}@2x.png" >/dev/null
+          done
+          iconutil -c icns icon.iconset -o "$APP/Contents/Resources/AutoTranslate.icns"
+
+          cat > "$APP/Contents/Info.plist" <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>CFBundleName</key><string>Auto Translate Clipboard</string>
+              <key>CFBundleDisplayName</key><string>Auto Translate Clipboard</string>
+              <key>CFBundleIdentifier</key><string>com.hasoftware.autotranslate</string>
+              <key>CFBundleExecutable</key><string>AutoTranslate</string>
+              <key>CFBundleIconFile</key><string>AutoTranslate</string>
+              <key>CFBundlePackageType</key><string>APPL</string>
+              <key>CFBundleShortVersionString</key><string>$VERSION</string>
+              <key>CFBundleVersion</key><string>$VERSION</string>
+              <key>LSMinimumSystemVersion</key><string>11.0</string>
+              <key>NSHighResolutionCapable</key><true/>
+          </dict>
+          </plist>
+          EOF
+
+          # ditto giữ nguyên permissions + metadata của bundle
+          ditto -c -k --keepParent "$APP" "AutoTranslateClipboard-$TAG-${{ matrix.rid }}.app.zip"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.rid }}
+          path: AutoTranslateClipboard-*.app.zip
+
+  release:
+    needs: [windows, linux, macos]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag || github.ref_name }}
+          prerelease: ${{ contains(inputs.tag || github.ref_name, '-') || contains(inputs.tag || github.ref_name, 'preview') }}
+          files: artifacts/*
+          generate_release_notes: false
