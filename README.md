@@ -55,6 +55,10 @@ Open Settings from the gear button in the top right corner.
 - Run at startup: launch the app automatically when Windows starts.
 - Languages shown in dropdowns: tick only the languages you use. The rest are hidden from the source and target dropdowns.
 
+<p align="center">
+  <img src="docs/screenshot-settings.png" alt="Settings dialog: theme, hotkey, run at startup, and the language picker" width="420">
+</p>
+
 ## Build from source
 
 Requirements:
@@ -95,6 +99,10 @@ This project is licensed under the [MIT License](LICENSE).
 ## Free software
 
 Auto Translate Clipboard is one hundred percent free. If you were asked to pay for it, you were scammed. Always download the original from the links below.
+
+<p align="center">
+  <img src="docs/screenshot-about.png" alt="About dialog" width="420">
+</p>
 
 ## Author
 
