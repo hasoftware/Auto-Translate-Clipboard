@@ -8,6 +8,10 @@ A lightweight Windows 11 translation tool. Press a global hotkey anywhere, type 
 
 Built with WinUI 3 (Windows App SDK) for a native Fluent look that follows your system light or dark theme.
 
+<p align="center">
+  <img src="docs/screenshot-main.png" alt="Auto Translate Clipboard main window (dark theme)" width="466">
+</p>
+
 ## Features
 
 - Global hotkey to summon the window from any application (default: Ctrl + Shift + T).
