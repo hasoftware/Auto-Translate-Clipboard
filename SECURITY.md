@@ -18,7 +18,7 @@ Instead, report them privately via one of these channels:
 
 - **GitHub**: use [private vulnerability reporting](https://github.com/hasoftware/Auto-Translate-Clipboard/security/advisories/new)
   (Security tab → "Report a vulnerability"), or
-- **Email**: hacklike17.ai@gmail.com
+- **Email**: admin@hasoftware.vn
 
 Please include as much of the following as you can:
 
