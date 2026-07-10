@@ -34,6 +34,10 @@ Built with WinUI 3 (Windows App SDK) for a native Fluent look that follows your 
 The macOS and Linux versions are separate Avalonia apps with the same
 workflow. See the README in each folder for build steps and platform notes.
 
+Preview builds for macOS and Linux are available in the
+[cross-platform preview release](https://github.com/hasoftware/Auto-Translate-Clipboard/releases/tag/cross-platform-preview1)
+— testers welcome, please report results in the Issues.
+
 ## How it works
 
 The app sends the text to Google Translate's public endpoint and reads the result as JSON, so multi line text and Unicode are handled correctly. The translation is always placed on the clipboard, ready to paste.
